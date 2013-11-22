@@ -1,0 +1,40 @@
+//UVA SOLUTION 146
+// by ak92thelooser
+
+
+#include<iostream>
+using namespace std;
+#include<algorithm>
+#include<cstring>
+#include<cstdlib>
+int main()
+{
+    while(1)
+    {
+        string s;
+        cin>>s;
+        if(s[0]=='#')
+       {
+           break;
+       }
+
+        string temp;
+        temp=s;
+        sort(temp.begin(),temp.end());
+        reverse(temp.begin(),temp.end());
+
+        if(s==temp)
+            cout<<"No Successor"<<endl;
+        else
+        {
+            next_permutation(s.begin(),s.end());
+            cout<<s<<endl;
+        }
+
+
+
+
+    }
+   // system("pause");
+    return 0;
+}
