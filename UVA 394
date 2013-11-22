@@ -1,0 +1,113 @@
+//UvA 394
+//by ak92thelooser
+
+
+#include<iostream>
+using namespace std;
+#include<vector>
+#include<algorithm>
+#include<cstdio>
+
+struct arr{
+    char name[10];
+    int base;
+    int siz;
+    int dim;
+
+    };
+
+vector<int>lower;
+vector<int>upper;
+int main()
+{ int n,r;
+cin>>n>>r;
+arr sample[n];
+arr test;
+
+for(int i=0;i<n;i++)
+{
+    cin>>sample[i].name;cin>>sample[i].base>>sample[i].siz>>sample[i].dim;
+    for(int j=0;j<sample[i].dim;j++)
+    {
+        int p,q;
+        cin>>p>>q;
+
+        lower.push_back(p);
+        upper.push_back(q);
+    }
+
+}
+
+ for(int i=0;i<r;i++)
+    {   int j;
+        cin>>test.name;
+        int index1=0,index2=0;
+
+        for( j=0;j<n;j++)
+        {
+            index1+=sample[j].dim;
+           if((string)test.name==(string)sample[j].name)
+            {   index1--;
+
+                int refe[sample[j].dim];
+
+                for(int k=0;k<sample[j].dim;k++)
+                cin>>refe[k];
+
+               int address=0;
+
+               int c[(sample[j].dim)+1];
+               c[sample[j].dim]=sample[j].siz;
+
+               c[0]=sample[j].base;
+
+               index2=index1-sample[j].dim+1;
+
+
+
+
+              for(int p=(sample[j].dim)-1;p>0;p--)
+               {
+
+
+                   c[p]=c[p+1]*(upper[index1]-lower[index1]+1);
+                   index1--;
+
+               }
+
+            for(int r=1;r<=sample[j].dim;r++)
+               {
+                   c[0]-=c[r]*lower[index2];
+
+                   index2++;
+
+
+               address=c[0];
+
+               for(int r=1;r<=sample[j].dim;r++)
+                {
+                    address+=c[r]*refe[r-1];
+                }
+
+               cout<<(string)test.name<<"[";
+                for(int s=0;s<sample[j].dim;s++)
+                {   if(s==sample[j].dim-1)
+                     {
+                         cout<<refe[s]<<"]";
+                         break;
+                     }
+                    cout<<refe[s]<<", ";
+                }
+                cout<<" = "<<address<<endl;;
+
+
+
+
+            }
+        }
+    }
+    }
+system("pause");
+
+return 0;
+}
